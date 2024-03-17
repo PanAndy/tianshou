@@ -29,16 +29,16 @@ def get_args() -> argparse.Namespace:
     parser.add_argument("--buffer-size", type=int, default=20000)
     parser.add_argument("--lr", type=float, default=3e-4)
     parser.add_argument("--gamma", type=float, default=0.99)
-    parser.add_argument("--epoch", type=int, default=10)
+    parser.add_argument("--epoch", type=int, default=20)
     parser.add_argument("--step-per-epoch", type=int, default=50000)
     parser.add_argument("--step-per-collect", type=int, default=2000)
     parser.add_argument("--repeat-per-collect", type=int, default=10)
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--hidden-sizes", type=int, nargs="*", default=[64, 64])
-    parser.add_argument("--training-num", type=int, default=20)
-    parser.add_argument("--test-num", type=int, default=100)
+    parser.add_argument("--training-num", type=int, default=1)
+    parser.add_argument("--test-num", type=int, default=1)
     parser.add_argument("--logdir", type=str, default="log")
-    parser.add_argument("--render", type=float, default=0.0)
+    parser.add_argument("--render", type=float, default=1.0)
     parser.add_argument(
         "--device",
         type=str,
