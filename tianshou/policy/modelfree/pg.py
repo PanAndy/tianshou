@@ -182,7 +182,8 @@ class PGPolicy(BasePolicy[TPGTrainingStats], Generic[TPGTrainingStats]):
             dist = self.dist_fn(*logits)
         else:
             dist = self.dist_fn(logits)
-
+        # TODO: 这里actor的输出格式得改成{}，每组参数有一个head
+        #       然后action就是一个Dict，直接就是最终结果
         # in this case, the dist is unused!
         if self.deterministic_eval and not self.training:
             act = dist.mode
