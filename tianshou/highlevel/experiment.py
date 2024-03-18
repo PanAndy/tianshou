@@ -4,7 +4,7 @@ from abc import abstractmethod
 from collections.abc import Sequence
 from dataclasses import dataclass
 from pprint import pformat
-from typing import Self
+from typing_extensions import Self
 
 import numpy as np
 import torch

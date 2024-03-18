@@ -9,10 +9,8 @@ import sys
 import types
 from abc import ABC, abstractmethod
 from collections.abc import Callable, Iterable, Mapping, Sequence
-from typing import (
-    Any,
-    Self,
-)
+from typing import Any
+from typing_extensions import Self
 
 reCommaWhitespacePotentiallyBreaks = re.compile(r",\s+")
 

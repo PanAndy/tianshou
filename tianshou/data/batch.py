@@ -3,10 +3,10 @@ import warnings
 from collections.abc import Collection, Iterable, Iterator, Sequence
 from copy import deepcopy
 from numbers import Number
+from typing_extensions import Self
 from typing import (
     Any,
     Protocol,
-    Self,
     TypeVar,
     Union,
     cast,

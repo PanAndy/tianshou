@@ -1,6 +1,7 @@
 from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Any, Self
+from typing_extensions import Self
+from typing import Any
 
 import gymnasium as gym
 import numpy as np

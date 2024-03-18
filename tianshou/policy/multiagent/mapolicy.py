@@ -1,4 +1,5 @@
-from typing import Any, Literal, Protocol, Self, cast, overload
+from typing_extensions import Self
+from typing import Any, Literal, Protocol, cast, overload
 
 import numpy as np
 from overrides import override
