@@ -4,6 +4,7 @@ from typing import Any, Generic, Literal, TypeVar
 import gymnasium as gym
 import numpy as np
 import torch
+import torchviz
 from torch import nn
 
 from tianshou.data import ReplayBuffer, SequenceSummaryStats, to_torch_as
@@ -12,6 +13,9 @@ from tianshou.policy import A2CPolicy
 from tianshou.policy.base import TLearningRateScheduler, TrainingStats
 from tianshou.policy.modelfree.pg import TDistributionFunction
 from tianshou.utils.net.common import ActorCritic
+
+
+has_show = False
 
 
 @dataclass(kw_only=True)
@@ -146,6 +150,7 @@ class PPOPolicy(A2CPolicy[TPPOTrainingStats], Generic[TPPOTrainingStats]):  # ty
         *args: Any,
         **kwargs: Any,
     ) -> TPPOTrainingStats:
+        global has_show
         losses, clip_losses, vf_losses, ent_losses = [], [], [], []
         split_batch_size = batch_size or -1
         for step in range(repeat):
@@ -182,6 +187,12 @@ class PPOPolicy(A2CPolicy[TPPOTrainingStats], Generic[TPPOTrainingStats]):  # ty
                 # calculate regularization and overall loss
                 ent_loss = dist.entropy().mean()
                 loss = clip_loss + self.vf_coef * vf_loss - self.ent_coef * ent_loss
+
+                if not has_show:
+                    dot = torchviz.make_dot(loss, params=dict(self.named_parameters()))
+                    dot.view()
+                    has_show = True
+
                 self.optim.zero_grad()
                 loss.backward()
                 if self.max_grad_norm:  # clip large gradient
