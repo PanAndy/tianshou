@@ -44,7 +44,11 @@ def to_torch(
         x.dtype.type,
         np.bool_ | np.number,
     ):  # most often case
-        x = torch.from_numpy(x).to(device)
+        if device.type == "mps" or device == 'mps':
+            x = torch.from_numpy(x).float()
+        else:
+            x = torch.from_numpy(x)
+        x = x.to(device)
         if dtype is not None:
             x = x.type(dtype)
         return x
